@@ -1,6 +1,3 @@
 pandas
 gradio
-io
-requests
-base64
-time
+streamlit
