@@ -1,6 +1,5 @@
 pandas
 gradio
-PIL
 io
 requests
 base64
