@@ -1,0 +1,7 @@
+pandas
+gradio
+PIL
+io
+requests
+base64
+time

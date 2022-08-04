@@ -1,10 +1,6 @@
 import streamlit as st
 from PIL import Image
-import torch
-import os
 from cv import cnnImageProcessing
-import folium
-from streamlit_folium import folium_static 
 import pandas as pd 
 
 
