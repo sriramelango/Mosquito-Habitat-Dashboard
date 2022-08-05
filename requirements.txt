@@ -2,3 +2,4 @@ pandas
 gradio
 streamlit
 selenium
+webdriver_manager
