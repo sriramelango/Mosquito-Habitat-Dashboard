@@ -28,7 +28,7 @@ with st.expander("Location Map Analysis"):
     st.map(location)
 
 with st.expander("CNN Processing"):
-    st.info("Current Location:", latitudeInput, longitudeInput)
+    st.info("Current Location:" + str(latitudeInput) +", " + str(longitudeInput))
     if st.button("Obtain Satellite Image"):
         with st.spinner("Extracting from Google Earth..."): 
             satelliteImage = obtainSatelliteImage(latitudeInput, longitudeInput)
