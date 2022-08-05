@@ -28,12 +28,25 @@ with st.expander("Location Map Analysis"):
     st.map(location)
 
 with st.expander("CNN Processing"):
-    st.info("Current Location:" + str(latitudeInput) +", " + str(longitudeInput))
-    if st.button("Obtain Satellite Image"):
-        with st.spinner("Extracting from Google Earth..."): 
-            satelliteImage = obtainSatelliteImage(latitudeInput, longitudeInput)
-        st.image(satelliteImage)
-        if st.button("Process with CNN"):
-            with st.spinner('Analyzing...'):
-                newImage = Image.open(cnnImageProcessing(satelliteImage))
-                st.image(newImage)
+    st.info("Current Location: " + str(latitudeInput) +", " + str(longitudeInput))
+    st.info("""Provided below is a link to the Google Earth location at the desired altitude.
+    Please click the link and load the page, turn the map style to clean, and take a screenshot.
+    Upload the image down below!
+    """)
+    st.success("https://earth.google.com/web/@" + str(latitudeInput) + "," + str(longitudeInput) + ",38000d")
+    image = st.file_uploader("Upload an Image", type= ['png', 'jpg', 'jpeg'])
+
+    if image is not None and st.button("Detect"):
+        inputImage = Image.open(image)
+        with st.spinner('Analyzing...'):
+            newImage = Image.open(cnnImageProcessing(inputImage))
+            st.image(newImage)
+
+    #if st.button("Obtain Satellite Image"):
+        #with st.spinner("Extracting from Google Earth..."): 
+            #satelliteImage = obtainSatelliteImage(latitudeInput, longitudeInput)
+        #st.image(satelliteImage)
+        #if st.button("Process with CNN"):
+            #with st.spinner('Analyzing...'):
+                #newImage = Image.open(cnnImageProcessing(satelliteImage))
+                #st.image(newImage)
