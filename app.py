@@ -2,7 +2,7 @@ import streamlit as st
 from PIL import Image
 from cv import cnnImageProcessing
 import pandas as pd 
-
+from satellite import obtainSatelliteImage
 
 st.set_page_config(layout = 'wide')
 st.title("CNN Mosquito Habitat Detection")
@@ -27,11 +27,13 @@ with st.expander("Identify Desired Location"):
 with st.expander("Location Map Analysis"):
     st.map(location)
 
-
-image = st.file_uploader("Upload an Image", type= ['png', 'jpg', 'jpeg'])
-
-if image is not None and st.button("Detect"):
-    inputImage = Image.open(image)
-    with st.spinner('Analyzing...'):
-        newImage = Image.open(cnnImageProcessing(inputImage))
-        st.image(newImage)
+with st.expander("CNN Processing"):
+    st.info("Current Location:", latitudeInput, longitudeInput)
+    if st.button("Obtain Satellite Image"):
+        with st.spinner("Extracting from Google Earth..."): 
+            satelliteImage = obtainSatelliteImage(latitudeInput, longitudeInput)
+        st.image(satelliteImage)
+        if st.button("Process with CNN"):
+            with st.spinner('Analyzing...'):
+                newImage = Image.open(cnnImageProcessing(satelliteImage))
+                st.image(newImage)
